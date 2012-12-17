@@ -44,14 +44,14 @@ $ tari list.txt -c /
 $ tari list.txt -d
 [
   {
-    "path": "/Users/ogom/Pictures/syaraku_eye.jpg",
+    "path": "/tmp/001.txt",
     "type": "file",
     "user": "ogom",
     "group": "staff",
     "mode": "0644",
-    "size": 31165,
-    "time": "2012-08-18 22:27:10",
-    "md5": "40c3fd1d4579bca59f0aa37544cbdad7"
+    "size": 3,
+    "time": "2012-12-12 12:12:12",
+    "md5": "dc5c7986daef50c1e02ab09b442ee34f"
   },
 ]
 ```

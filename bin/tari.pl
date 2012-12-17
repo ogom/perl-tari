@@ -29,12 +29,12 @@ GetOptions(
   'debug'    => \$debug,
 );
 
-# init
+# Init
 &_help if (scalar(@ARGV) eq 0);
 
 my ($list) = @ARGV;
 
-# main
+# Main
 eval {&_exec};
 if ($@) {
   chomp(my $message = $@); 
@@ -44,7 +44,7 @@ if ($@) {
 
 exit;
 
-## private function
+## Private function
 sub _exec {
   my @basename = split(/\./, basename($list));
   my @files = ($basename[0].'.tar');
@@ -115,7 +115,7 @@ sub _get_files {
   return @files;
 }
 
-## file exists.
+## File exists.
 sub _get_file_type {
   my $path = shift;
   my $type;
@@ -137,7 +137,6 @@ sub _get_file_type {
   return $type;
 }
 
-
 ## Making of archive.
 sub _set_archive {
   my $path = shift;
@@ -146,8 +145,10 @@ sub _set_archive {
   my $create;
 
   print "[\n" if (defined($debug));
+
   foreach my $file(@files) {
     &_put_json($file) if (defined($debug));
+
     if ($file->{type} eq 'file') {
       my $cmd = 'tar ';
       $cmd .= defined($create) ? '-r' : '-c';
@@ -156,15 +157,14 @@ sub _set_archive {
       $cmd .= ' .\''.$file->{path}.'\'';
       $create = 'false';
       
-      if (system($cmd) >> 8) {
-        die "command error: $cmd";
-      }
+      die "command error: $cmd" if (system($cmd) >> 8);
     }
   }
+
   print "]\n" if (defined($debug));
 }
 
-## JSON
+## JSON output
 sub _put_json {
   my $file = shift;
   print <<CONTENT;
@@ -201,7 +201,7 @@ CONTENT
 
 sub _version {
   print <<CONTENT;
-1.0.1
+1.0.2
 CONTENT
   exit 0;
 }
