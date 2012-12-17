@@ -7,67 +7,53 @@ tari is archived from the file list of include.
 ## Installation
 
 ```
+$ git clone https://github.com/ogom/perl-tari.git
 $ cd perl-tari
-$ chmod +x ./bin/tari.pl 
+$ chmod +x ./bin/tari.pl
 $ sudo ln ./bin/tari.pl /usr/bin/tari
 ```
 
 
 ## Usage
 
-```
-$ tari list.txt
-[
-  {
-    "path": "/tmp/001.txt",
-    "type": "file",
-    "user": "ogom",
-    "group": "staff",
-    "mode": "0644",
-    "size": 3,
-    "time": "2012-12-12 01:01:22",
-    "md5": "dc5c7986daef50c1e02ab09b442ee34f"
-  },
-  {
-    "path": "/tmp/002.txt",
-    "type": "file",
-    "user": "ogom",
-    "group": "staff",
-    "mode": "0644",
-    "size": 3,
-    "time": "2012-12-12 01:01:33",
-    "md5": "93dd4de5cddba2c733c65f233097f05a"
-  },
-  {
-    "path": "/tmp/003.txt",
-    "type": "file",
-    "user": "ogom",
-    "group": "staff",
-    "mode": "0644",
-    "size": 3,
-    "time": "2012-12-12 01:01:44",
-    "md5": "e88a49bccde359f0cabb40db83ba6080"
-  },
-]
-
-
-### Include list
+### Execute archive
 
 ```
 $ cat list.txt 
 /tmp/001.txt
 /tmp/002.txt
 /tmp/003.txt
-```
-
-
-### List archive contents
-
-```
+$ tari list.txt
 $ tar tf list.tar 
 ./tmp/001.txt
 ./tmp/002.txt
 ./tmp/003.txt
+```
+
+
+### Change to directory
+
+```
+$ tari list.txt -c /
+```
+
+
+### Debug output JSON
+
+```
+$ tari list.txt -d
+[
+  {
+    "path": "/Users/ogom/Pictures/syaraku_eye.jpg",
+    "type": "file",
+    "user": "ogom",
+    "group": "staff",
+    "mode": "0644",
+    "size": 31165,
+    "time": "2012-08-18 22:27:10",
+    "md5": "40c3fd1d4579bca59f0aa37544cbdad7"
+  },
+]
 ```
 
 

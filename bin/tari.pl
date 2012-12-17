@@ -20,12 +20,13 @@ use File::stat;
 use Fcntl qw(:DEFAULT :flock);
 use Getopt::Long;
 
-my ($dir, $yes);
+my ($dir, $yes, $debug);
 GetOptions(
-  'dir=s'   => \$dir,
-  'yes'     => \$yes,
-  'help'    => \&_help,
-  'version' => \&_version,
+  'change=s' => \$dir,
+  'yes'      => \$yes,
+  'help'     => \&_help,
+  'version'  => \&_version,
+  'debug'    => \$debug,
 );
 
 # init
@@ -144,9 +145,9 @@ sub _set_archive {
   my @files= @_;
   my $create;
 
-  print "[\n";
+  print "[\n" if (defined($debug));
   foreach my $file(@files) {
-    &_put_json($file);
+    &_put_json($file) if (defined($debug));
     if ($file->{type} eq 'file') {
       my $cmd = 'tar ';
       $cmd .= defined($create) ? '-r' : '-c';
@@ -160,7 +161,7 @@ sub _set_archive {
       }
     }
   }
-  print "]\n";
+  print "]\n" if (defined($debug));
 }
 
 ## JSON
@@ -185,10 +186,11 @@ sub _help {
 Usage: $Script [OPTION] [FILE]
 
 Startup:
-  -d  --dir      change to directory
-  -y  --yes      answer yes for all questions
-  -h, --help     output usage information
-  -v, --version  output the version number
+  -c  --change   Change to directory
+  -y  --yes      Answer yes for all questions
+  -h, --help     Output usage information
+  -v, --version  Output the version number
+  -d, --debug    Enable debug output
 
 Example:
   $Script list.txt
